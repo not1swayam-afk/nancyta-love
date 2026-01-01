@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Nancyta ♥️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+    background:#0b0612;
+    color:white;
+    overflow:hidden;
+}
+
+/* HEART BACKGROUND */
+.hearts-bg{
+    position:fixed;
+    inset:0;
+    background:
+      radial-gradient(circle at 10% 20%, #ff5fa2 2px, transparent 3px),
+      radial-gradient(circle at 30% 40%, #ff5fa2 2px, transparent 3px),
+      radial-gradient(circle at 70% 60%, #ff5fa2 2px, transparent 3px),
+      radial-gradient(circle at 90% 80%, #ff5fa2 2px, transparent 3px);
+    background-size:120px 120px;
+    opacity:0.15;
+    z-index:-2;
+}
+
+/* FLOATING HEARTS */
+.heart{
+    position:absolute;
+    bottom:-50px;
+    width:20px;
+    height:20px;
+    background:#ff5fa2;
+    transform:rotate(45deg);
+    animation: float 10s linear infinite;
+}
+.heart::before,
+.heart::after{
+    content:"";
+    position:absolute;
+    width:20px;
+    height:20px;
+    background:#ff5fa2;
+    border-radius:50%;
+}
+.heart::before{ top:-10px; left:0; }
+.heart::after{ left:-10px; top:0; }
+
+@keyframes float{
+    0%{ transform:translateY(0) rotate(45deg); opacity:0; }
+    20%{ opacity:1; }
+    100%{ transform:translateY(-120vh) rotate(45deg); opacity:0; }
+}
+
+/* PAGE SYSTEM */
+.page{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 1s ease;
+}
+.page.active{
+    opacity:1;
+    pointer-events:auto;
+}
+
+h1{
+    font-size:3rem;
+    color:#ff8acb;
+    margin-bottom:20px;
+    animation: fadeUp 1.5s ease;
+}
+
+p{
+    font-size:1.2rem;
+    max-width:500px;
+    text-align:center;
+    opacity:0.9;
+    animation: fadeUp 2s ease;
+}
+
+@keyframes fadeUp{
+    from{ opacity:0; transform:translateY(30px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+
+/* BUTTON */
+button{
+    margin-top:40px;
+    padding:12px 30px;
+    border:none;
+    border-radius:30px;
+    background:#ff5fa2;
+    color:white;
+    font-size:1.1rem;
+    cursor:pointer;
+    animation: pulse 2s infinite;
+}
+button:hover{ transform:scale(1.05); }
+
+@keyframes pulse{
+    0%{ box-shadow:0 0 0 0 rgba(255,95,162,.6); }
+    70%{ box-shadow:0 0 0 20px rgba(255,95,162,0); }
+    100%{ box-shadow:0 0 0 0 rgba(255,95,162,0); }
+}
+
+/* QUESTIONS */
+.question{
+    width:70%;
+    margin:15px 0;
+    padding:15px;
+    border:1px solid #ff8acb;
+    border-radius:12px;
+    cursor:pointer;
+    color:#ffb6da;
+    transition:0.4s;
+}
+.question:hover{ background:rgba(255,95,162,0.1); }
+
+.answer{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height 1s ease, opacity 1s ease;
+    opacity:0;
+    color:white;
+}
+.answer.show{
+    max-height:200px;
+    opacity:1;
+    margin-top:10px;
+}
+
+/* LOVE PAGE */
+.love{
+    font-size:2.5rem;
+    color:#ff5fa2;
+    animation: heartbeat 1.5s infinite;
+}
+@keyframes heartbeat{
+    0%,100%{ transform:scale(1); }
+    50%{ transform:scale(1.1); }
+}
+
+/* CHAT */
+.chat{
+    width:80%;
+    max-width:400px;
+    background:#14081f;
+    border-radius:15px;
+    padding:15px;
+}
+.messages{
+    height:200px;
+    overflow-y:auto;
+}
+.msg{
+    background:#ff5fa2;
+    padding:8px 12px;
+    border-radius:15px;
+    margin:5px 0;
+    align-self:flex-end;
+}
+input{
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+    border-radius:10px;
+    border:none;
+}
+</style>
+</head>
+
+<body>
+<div class="hearts-bg"></div>
+
+<!-- FLOATING HEARTS -->
+<script>
+for(let i=0;i<25;i++){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.style.left=Math.random()*100+"%";
+    h.style.animationDuration=6+Math.random()*6+"s";
+    document.body.appendChild(h);
+}
+</script>
+
+<!-- PAGE 1 -->
+<div class="page active" id="p1">
+<h1>Nancyta ♥️</h1>
+<p>This is just a very small part of how much I love you.</p>
+<button onclick="go(2)">Continue ♥️</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="p2">
+<div class="question" onclick="toggle(this)">
+Why do I love you so much?
+<div class="answer">Because you feel like home, peace, and excitement all at once.</div>
+</div>
+
+<div class="question" onclick="toggle(this)">
+What do you mean to me?
+<div class="answer">You mean more than words, more than distance, more than time.</div>
+</div>
+
+<div class="question" onclick="toggle(this)">
+What do I promise you?
+<div class="answer">To grow, to love you better every day, and to never stop choosing you.</div>
+</div>
+
+<button onclick="go(3)">Continue ♥️</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="p3">
+<div class="love">I LOVE YOU SOO MUCH<br>MY BABY GIRL 💝</div>
+<button onclick="go(4)">One last thing ♥️</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="p4">
+<div class="chat">
+<div class="messages" id="msgs"></div>
+<input placeholder="Type something for me…" onkeydown="send(event)">
+</div>
+</div>
+
+<script>
+function go(n){
+    document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+    document.getElementById("p"+n).classList.add("active");
+}
+function toggle(el){
+    el.querySelector(".answer").classList.toggle("show");
+}
+function send(e){
+    if(e.key==="Enter"){
+        let msg=document.createElement("div");
+        msg.className="msg";
+        msg.innerText=e.target.value;
+        document.getElementById("msgs").appendChild(msg);
+        e.target.value="";
+    }
+}
+</script>
+
+</body>
+</html>
